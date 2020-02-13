@@ -1,0 +1,131 @@
+<%include includes/header.ejs%>
+<section id="One" class="wrapper style3">
+    <div class="inner">
+        <header class="align-center">
+            <style>
+                @media screen and (min-width: 480px) { /* 모바일 화면 시 띄어쓰기 하나 넣은 용도. */
+                    #brs{
+                        display:none;
+                    }
+                }
+            </style>
+            <div id="brs">
+                <br>
+            </div>
+            <p>Search books</p>
+            <h2>검 색</h2>
+        </header>
+    </div>
+</section>
+<section id="two" class="wrapper style2">
+    <div class="inner">
+        <div class="box">
+            <div class="content" id="cott">
+                <form id="form_submit" method="post" style="margin-left: 20px;" >
+                    <div id="search_area" class="row uniform">
+                        <style>
+                            @media screen and (max-width: 480px) { /* 모바일 화면 시 화면 깨짐 현상 수정. */
+                                #SA, #Input_d{
+                                    width:auto;
+                                }
+                                #search_area{
+                                    display:grid;
+                                    grid-template-columns: 0fr 2fr 2fr 1fr;
+                                }
+                                .dlt_col{
+                                    display:none;
+                                }
+                            }
+                        </style>
+                        <div id="SA" class="3u" style="padding-left: 0px;">
+                            <div class="select-wrapper">
+                                <select name="category" id="category">
+                                    <option value="">선택하세요</option>
+                                    <option value="title">제목으로 검색</option>
+                                    <option value="writer">저자로 검색</option>
+                                    <option value="publisher">출판사로 검색</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div id="Input_d" class="8u 12u$(xsmall)" style="padding-left: 10px;">
+                            <input type="text" name="search_data" id="search_data" placeholder="내용을 입력하세요." />
+                        </div>
+                        <div class="1u 12u$(xsmall)" style="padding-left: 10px;">
+                            <input id="But" style="text-align: center; background-color:mediumpurple" type="button" value="검색" onclick="submit_popup()"/>
+                            <script type="text/javascript">
+                                //Enter 방지 code
+                                document.addEventListener('keydown', function(event) {
+                                    if (event.keyCode === 13) {
+                                        event.preventDefault();
+                                    };
+                                }, true);
+                                function submit_popup() {
+                                    if(__checkNull(document.getElementById('category').value)){
+                                        if(__checkNull(document.getElementById('search_data').value)){
+                                            document.getElementById('form_submit').submit();
+                                        }
+                                        else{
+                                            alert("검색할 내용을 입력하세요.");
+                                        }
+                                    }else{
+                                        alert("항목을 선택해 주세요.");
+                                    }
+
+                                }
+                                function __checkNull(value) {
+                                    if(value.replace(/^\s*/,'') === ''){
+                                        return false;
+                                    }else{
+                                        return true;
+                                    }
+                                }
+                            </script>
+                        </div>
+                    </div>
+                </form>
+                <br>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th class="dlt_col" style="text-align:center; vertical-align:middle;">이미지</th>
+                            <th colspan="2" style="text-align:center; vertical-align:middle;">제목</th>
+                            <th colspan="2" style="text-align:center; vertical-align:middle;">저자</th>
+                            <th colspan="2" style="text-align:center; vertical-align:middle;">출판사</th>
+                            <th style="text-align:center; vertical-align:middle;">대출 현황</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <%for(var i = (page_num - 1) * 5; i < page_num * 5; i++){%>
+                            <%var row = book_data[i]
+                                if(row === undefined) continue;
+                            %>
+                            <tr style="cursor: pointer" onclick="location.href='/search/detail/<%= row.book_value%>'" >
+                                <td class="dlt_col"><img style = "width:150px; height:212px" src="/images/<%= row.img_src%>"/></td>
+                                <td colspan="2" style="text-align:center;vertical-align:middle;"><%= row.title%></td>
+                                <td colspan="2" style="text-align:center;vertical-align:middle;"><%= row.writer%></td>
+                                <td colspan="2" style="text-align:center;vertical-align:middle;"><%= row.publisher%></td>
+                                <%if(row.QoB_state<=0){%>
+                                    <td style="color:red;text-align:center;vertical-align:middle;width:178px">대출 불가능</td>
+                                <%}else{%>
+                                    <td style="color:blue;text-align:center;vertical-align:middle;width:178px">대출 가능</td>
+                                <%}%>
+                            </tr>
+                        <%}%>
+                        </tbody>
+                    </table>
+                    <%if(book_data[0]==undefined || book_data[(page_num-1)*5] ==undefined){%>
+                        <p style="text-align: center">내용을 찾을 수 없습니다.</p>
+                    <%}%>
+                </div>
+                <h4 style="text-align: center">
+                    <%for(var i = 1; i <= Math.ceil(book_data.length / 5); i++){%>
+                        <a href="/search/page/<%= i%>"><%= i%> </a>
+                    <%}%>
+                </h4>
+            </div>
+        </div>
+    </div>
+</section>
+<%include includes/footer.ejs%>

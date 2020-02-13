@@ -1,0 +1,52 @@
+<title>Smart Bookshelf</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="/assets/css/main.css" />
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/jquery.scrollex.min.js"></script>
+<script src="/assets/js/skel.min.js"></script>
+<script src="/assets/js/util.js"></script>
+<script src="/assets/js/main.js"></script>
+
+<br>
+<p style="text-align:center;vertical-align:middle;" >
+    <img style="width:150px;height:212px"src="/images/<%=book_data[0].img_src%>"/>
+</p>
+<br>
+<div style="text-align:center;vertical-align:middle;">
+    <div class="table-wrapper" style="margin : 10px;">
+        <table class="alt">
+            <tbody>
+            <tr>
+                <td style="text-align:center; vertical-align:middle;">제목</td>
+                <td><%= book_data[0].title%></td>
+            </tr>
+            <tr>
+                <td style="text-align:center; vertical-align:middle;">저자</td>
+                <td><%= book_data[0].writer%></td>
+            </tr>
+            <tr>
+                <td style="text-align:center; vertical-align:middle;">출판사</td>
+                <td><%= book_data[0].publisher%></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="block">
+        <form id="chat">
+            <input id="message" class="message" type="text" value="<%=book_data[0].RFID_value%>" style="display:none">
+            <input type="submit" class="chat" value="찾기" style="border:1px solid"/>
+        </form>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.js"></script>
+        <script>
+            var socket = io();
+            $('#chat').on('submit', function(e){
+                socket.emit('send message', $('#message').val());
+                $('#message').val("");
+                $("#message").focus();
+                e.preventDefault();
+                window.location.href = '/search/find_book/<%=book_data[0].book_value%>';
+            });
+        </script>
+    </div>
+</div>

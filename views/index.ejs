@@ -1,0 +1,232 @@
+<%include includes/header.ejs%>
+<section class="banner full">
+	<article>
+		<img src="images/first.png" alt="" />
+		<div class="inner">
+			<header>
+				<p>코딩의 기초를 배워보세요.</p>
+				<h2 id="semi-id">C언어</h2>
+				<a id="inner1" href="/search/detail/49" class="button">바로가기</a> <!--수정 불필요.-->
+
+			</header>
+		</div>
+	</article>
+	<article>
+		<img src="images/sec.png" alt="" />
+		<div class="inner">
+			<header>
+				<p>나만의 앱을 만들어 보세요</p>
+				<h2 id="semi-id">Android</h2>
+				<a id="inner2" href="/search/detail/42" class="button">바로가기</a>
+			</header>
+		</div>
+	</article>
+</section>
+
+<!-- Search Session -->
+<section id="two" class="wrapper style2" style="padding:1px">
+	<div class="inner">
+		<div class="box">
+			<div class="content" style="background-color: #f2f2f2;">
+				<header class="align-center">
+					<form id="form_submit" method="post" action="/search/page/1" style="margin-left: 20px;" ><!--Post방식으로 넘김-->
+						<div id="search_area" class="row uniform">
+							<style>
+								@media screen and (max-width: 480px) { /* 모바일 접속 시 깨져 나오는 현상 수정. */
+									#SA, #Input_d{
+										width:auto;
+									}
+									#search_area{
+										display:grid;
+										grid-template-columns: 0fr 2fr 2fr 1fr;
+									}
+								}
+								@media screen and (max-width: 1281px) {/* 모바일 접속 시 바로가기 제거. */
+									#inner1, #inner2{
+										display:none;
+									}
+									#semi-id{
+										font-size:100px;
+									}
+								}
+								@media screen and (max-width: 980px) {/* 모바일 접속 시 바로가기 제거. */
+									#semi-id{
+										font-size:50px;
+									}
+								}
+							</style>
+							<div id="SA" class="3u" style="padding-left: 0px;">
+								<div class="select-wrapper">
+									<select name="category" id="category">
+										<option value="">선택하세요</option>
+										<option value="title">제목으로 검색</option>
+										<option value="writer">저자로 검색</option>
+										<option value="publisher">출판사로 검색</option>
+									</select>
+								</div>
+							</div>
+							<div id="Input_d" class="8u 12u$(xsmall)" style="padding-left: 10px;">
+								<input type="text" name="search_data" id="search_data" placeholder="내용을 입력하세요." />
+							</div>
+							<div class="1u 12u$(xsmall)" style="padding-left: 10px;">
+								<input id="But" style="text-align: center; background-color:mediumpurple" type="button" value="검색" onclick="submit_popup()"/>
+								<script type="text/javascript">
+									//Enter 방지 code
+									document.addEventListener('keydown', function(event) {
+										if (event.keyCode === 13) {
+											event.preventDefault();
+										};
+									}, true);
+									//검색 알고리즘 구현
+									function submit_popup() {
+										if(__checkNull(document.getElementById('category').value)){
+											if(__checkNull(document.getElementById('search_data').value)){
+												document.getElementById('form_submit').submit();
+											}
+											else{
+												alert("검색할 내용을 입력하세요.");
+											}
+										}else{
+											alert("항목을 선택해 주세요.");
+										}
+
+									}
+									function __checkNull(value) {
+										if(value.replace(/^\s*/,'') === ''){
+											return false;
+										}else{
+											return true;
+										}
+									}
+								</script>
+							</div>
+						</div>
+					</form>
+				</header>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- Brand new books Session-->
+<section id="one" class="wrapper style2" style="padding-top: 0px;">
+	<div class="inner">
+		<div class="grid-style">
+			<div>
+				<div class="box">
+					<div class="image fit">
+						<br>
+						<img style = "width:150px; height:212px; display: table; margin-left: auto; margin-right: auto; border:2px solid black;" src="/images/<%= book_data[0].img_src%>"/>
+					</div>
+					<div class="content">
+						<header class="align-center">
+							<p>저자 <%= book_data[0].writer%>님의 작품</p>
+							<h2 style="height: 80px;margin-bottom: 0px;"><%= book_data[0].title%></h2>
+						</header>
+						<p style = "display: table; margin-left: auto; margin-right: auto;">출판사 : <%= book_data[0].publisher%><br><br>
+							<%if(book_data[0].QoB_state <=0){%>
+								대여할 수 있는 책이 없습니다.
+							<%}else{%>
+								현재 <%= book_data[0].QoB_state%>권이 있습니다.
+							<%}%>
+						</p>
+						<footer class="align-center">
+							<a href="/search/detail/<%= book_data[0].book_value%>" class="button alt">더 보기</a>
+						</footer>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div class="box">
+					<div class="image fit">
+						<br>
+						<img style = "width:150px; height:212px; display: table; margin-left: auto; margin-right: auto;border:2px solid black;" src="/images/<%= book_data[1].img_src%>"/>
+					</div>
+					<div class="content">
+						<header class="align-center">
+							<p>저자 <%= book_data[1].writer%>님의 작품</p>
+							<h2 style="height: 80px;margin-bottom: 0px;"><%= book_data[1].title%></h2>
+						</header>
+						<p style = "display: table; margin-left: auto; margin-right: auto;">출판사 : <%= book_data[1].publisher%><br><br>
+							<%if(book_data[1].QoB_state <=0){%>
+								대여할 수 있는 책이 없습니다.
+							<%}else{%>
+								현재 <%= book_data[1].QoB_state%>권이 있습니다.
+							<%}%>
+						</p>
+						<footer class="align-center">
+							<a href="/search/detail/<%= book_data[1].book_value%>" class="button alt">더 보기</a>
+						</footer>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- Loan a book Session -->
+<section id="two" class="wrapper style3">
+	<div class="inner">
+		<header class="align-center">
+			<p>Lender of books</p>
+			<h2>현재 대출 신청 인원</h2>
+		</header>
+	</div>
+</section>
+
+<!-- Human Data -->
+<section id="three" class="wrapper style2">
+	<div class="inner">
+		<div class="table-wrapper">
+			<table>
+				<thead>
+				<style>
+					.wrapper th, td{
+						text-align: center;
+					}
+				</style>
+				<tr>
+					<th>번호</th>
+					<th>책 이름</th>
+					<th>학번, 이름</th>
+					<th>대여 날짜 및 시간</th>
+					<th>반납 날짜</th>
+				</tr>
+				</thead>
+				<tbody>
+				<%for(var i = 0; i < 5; i++){%>
+					<%var row = borrow_data[i]
+						if(row === undefined) continue;
+					%>
+					<tr style="cursor: pointer" onclick="location.href='/search/detail/<%=row.book_value%>'" >
+						<td><%= row.borrow_value%></td>
+						<td><%= book_data[book_data.length - row.book_value].title%></td>
+						<td><%= row.stunum%>, <%= row.stuname%></td>
+						<td><%= row.start_date%></td>
+						<td><%= dv[i].ExtractString%></td>
+					</tr>
+				<%}%>
+				</tbody>
+			</table>
+			<%if(borrow_data[0]==undefined){%>
+				<p style="text-align: center">대여 목록이 없습니다.</p>
+			<%}%>
+		</div>
+	</div>
+</section>
+
+<table>
+	<tr onclick="location.href='/sendemail'">
+		<td>a</td>
+		<td>a</td>
+		<td>a</td>
+		<td>a</td>
+	</tr>
+	<tr onclick="location.href='/search/page/1'">
+		<td>b</td>
+		<td>b</td>
+		<td>b</td>
+		<td>b</td>
+	</tr>
+</table>
+<!-- Footer -->
+<%include includes/footer.ejs%>

@@ -1,0 +1,73 @@
+<title>Smart Bookshelf</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="/assets/css/main.css" />
+<script src="/assets/js/jquery.min.js"></script>
+<script src="/assets/js/jquery.scrollex.min.js"></script>
+<script src="/assets/js/skel.min.js"></script>
+<script src="/assets/js/util.js"></script>
+<script src="/assets/js/main.js"></script>
+
+<br>
+<p style="text-align:center;vertical-align:middle;" >
+    <img style="width:150px;height:212px"src="/images/<%=book_data[0].img_src%>"/>
+</p>
+<br>
+<div style="text-align:center;vertical-align:middle;">
+    <div class="table-wrapper" style="margin : 10px;">
+        <table class="alt">
+            <tbody>
+            <tr>
+                <td style="text-align:center; vertical-align:middle;">제목</td>
+                <td><%= book_data[0].title%></td>
+            </tr>
+            <tr>
+                <td style="text-align:center; vertical-align:middle;">저자</td>
+                <td><%= book_data[0].writer%></td>
+            </tr>
+            <tr>
+                <td style="text-align:center; vertical-align:middle;">출판사</td>
+                <td><%= book_data[0].publisher%></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <form id="form_submit" method="post">
+        <table class="alt">
+            <tbody>
+            <tr>
+                <td style="text-align:center; vertical-align:middle;">학번</td>
+                <td><input type="text", name="inputnum", id="inputnum"></td>
+                <td style="text-align:center; vertical-align:middle;">이름</td>
+                <td><input type="text", name="inputname", id="inputname"></td>
+            </tr>
+            </tbody>
+        </table>
+        <input class="button special icon fa-search" style="text-align: center" type="button" value="대출하기" onclick="submit_popup()"/>
+    </form>
+    <script type="text/javascript">
+        //Enter 방지 code
+        document.addEventListener('keydown', function(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+            };
+        }, true);
+
+        function submit_popup() {
+            if(__checkNull(document.getElementById('inputnum').value)&&__checkNull(document.getElementById('inputname').value)){
+                document.getElementById('form_submit').submit();
+                alert("대출 되었습니다. 대출 기간은 14일입니다.");
+                opener.parent.location='http://210.119.107.114:9928/search/detail/<%= book_data[0].book_value%>';
+                self.close();
+            }else{
+                alert("모든 내용을 입력해 주세요.");
+            }
+        }
+        function __checkNull(value) {
+            if(value.replace(/^\s*/,'') === ''){
+                return false;
+            }else{
+                return true;
+            }
+        }
+    </script>
+</div>

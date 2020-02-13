@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<%include includes/header.ejs%>
+<section id="One" class="wrapper style3">
+    <div class="inner">
+        <header class="align-center">
+            <style>
+                @media screen and (min-width: 480px) {
+                    #brs{
+                        display:none;
+                    }
+                }
+            </style>
+            <div id="brs">
+                <br>
+            </div>
+            <p>Questions</p>
+            <h2>문의사항</h2>
+        </header>
+    </div>
+</section>
+<section id="two" class="wrapper style2">
+    <div class="inner">
+        <div class="box">
+            <div class="content">
+                <header class="align-center">
+                    <p>Send email to Developer</p>
+                    <h2>개발자에게 이메일 보내기</h2><br><br>
+                </header>
+                <form id="form_submit" method="post">
+                  <div class="row uniform">
+                      <div class="6u 12u$(xsmall)">
+                        <input type="text" name="title" id="title" placeholder="제목" />
+                      </div>
+                      <div class="6u$ 12u$(xsmall)">
+                        <input type="email" name="email" id="email" placeholder="연락받을 이메일" />
+                      </div>
+                      <div class="12u$">
+                        <textarea name="message" id="message" style="resize: none;" placeholder="내용을 입력하세요." rows="6"></textarea>
+                      </div>
+                </div>
+                <br>
+                <input class="button special" style="float:right" type="button" value="발송하기" onclick="submit_popup()"/>
+              </form>
+                 <br>
+            </div>
+        </div>
+    </div>
+</section>
+<%include includes/footer.ejs%>
+</body>
+<script type="text/javascript">
+    function submit_popup() {
+        if(
+            __checkNull(document.getElementById('title').value)&&
+            __checkNull(document.getElementById('email').value)&&
+            __checkNull(document.getElementById('message').value)
+        ){
+            if(confirm("작성하시겠습니까?") === true){
+                document.getElementById('form_submit').submit();
+                alert("등록되었습니다");
+            }else{
+                return false;
+            }
+        }else{
+            alert("작성 사항을 모두 기입해주세요.");
+        }
+
+    }
+    function __checkNull(value) {
+        if(value.replace(/^\s*/,'') === ''){
+            return false;
+        }else{
+            return true;
+        }
+    }
+</script>
