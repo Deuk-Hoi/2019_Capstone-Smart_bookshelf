@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:background="#35373F"
+    tools:context=".MainActivity"
+    tools:showIn="@layout/app_bar_main">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="15dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/layout1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_gravity="center">
+
+            <Button
+                android:id="@+id/searchbooks_btn"
+                android:layout_width="165dp"
+                android:layout_height="210dp"
+                android:layout_marginRight="5dp"
+                android:background="#F8634D"
+                android:drawableTop="@drawable/search"
+                android:paddingTop="40dp"
+                android:paddingBottom="30dp"
+                android:text="자료 검색"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/Readingcard_btn"
+                android:layout_width="165dp"
+                android:layout_height="210dp"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@id/searchbooks_btn"
+                android:paddingTop="40dp"
+                android:paddingBottom="30dp"
+                android:drawableTop="@drawable/card"
+                android:text="모바일 회원증"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:background="#3560A5" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_gravity="center">
+
+            <Button
+                android:id="@+id/search_barcord_btn"
+                android:layout_width="165dp"
+                android:layout_height="210dp"
+                android:layout_marginRight="5dp"
+                android:background="#90A83A"
+                android:drawableTop="@drawable/barcode"
+                android:paddingTop="40dp"
+                android:paddingBottom="30dp"
+                android:text="바코드 검색"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+            <Button
+                android:id="@+id/info_btn"
+                android:layout_width="77dp"
+                android:layout_height="100dp"
+                android:layout_toRightOf="@id/search_barcord_btn"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:drawableTop="@drawable/info"
+                android:text="이용안내"
+                android:textColor="#FFFFFF"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:background="#5597EE"/>
+
+            <Button
+                android:id="@+id/login_btn"
+                android:layout_width="77dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="5dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:drawableTop="@drawable/login"
+                android:text="로그인"
+                android:textColor="#FFFFFF"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:layout_toRightOf="@id/info_btn"
+                android:background="#F6A04B" />
+
+            <Button
+                android:id="@+id/mylibrary_btn"
+                android:layout_width="165dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="5dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:drawableTop="@drawable/mylibrary"
+                android:text="내 서재"
+                android:textColor="#FFFFFF"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:layout_alignBottom="@id/search_barcord_btn"
+                android:layout_toRightOf="@id/search_barcord_btn"
+                android:background="#5E6B7A" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="30dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/pcweb_btn"
+                android:layout_width="165dp"
+                android:layout_height="100dp"
+                android:layout_marginRight="5dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="5dp"
+                android:drawableTop="@drawable/libraryweb"
+                android:text="전자도서관"
+                android:textColor="#FFFFFF"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:background="#F6A04B"/>
+
+            <Button
+                android:id="@+id/rfid_btn"
+                android:layout_width="165dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="5dp"
+                android:drawableTop="@drawable/rfid"
+                android:text="RFID 대출"
+                android:textColor="#FFFFFF"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:layout_below="@id/pcweb_btn"
+                android:background="#3560A5" />
+
+            <Button
+                android:id="@+id/locationlibrary_btn"
+                android:layout_width="165dp"
+                android:layout_height="210dp"
+                android:layout_marginLeft="5dp"
+                android:paddingTop="40dp"
+                android:paddingBottom="30dp"
+                android:drawableTop="@drawable/location"
+                android:text="주변도서관"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:layout_toRightOf="@id/pcweb_btn"
+                android:background="#5597EE" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+
+</ScrollView>
